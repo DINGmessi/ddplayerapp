@@ -9,16 +9,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.widget.Toast;
-
-import java.net.URLConnection;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView channelRv;
-    private ChannelRvAdapter rvAdapter;
+    private Comment.ChannelRvAdapter rvAdapter;
     private ChannelLab lab = ChannelLab.getInstance();
     //线程通讯第1步，在主线程创建Handler
     private Handler handler = new Handler() {
@@ -40,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         this.channelRv = findViewById(R.id.channel_rv);
         //lambda简化
         //适应handler，把适配器改为实例变量
-        rvAdapter = new ChannelRvAdapter(MainActivity.this, p -> {
+        rvAdapter = new Comment.ChannelRvAdapter(MainActivity.this, p -> {
             //跳转到新界面，使用意图Intent
             Intent intent = new Intent(MainActivity.this, PlayerActivity.class);
             //通过位置p得到当前频道channel，传递用户选中的频道到下一个界面
